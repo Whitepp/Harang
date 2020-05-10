@@ -80,6 +80,14 @@ async def on_message(message):
             embed = discord.Embed(title=":fire: 운영진 목록\n", description=log, color=0x5c0bb7)
             await channel.send(embed=embed)
             return
+        
+        if author == "문의방":
+            await message.channel.send("https://open.kakao.com/o/g233VUcb")
+            return
+
+        if author == "수다방":
+           await message.channel.send("https://open.kakao.com/o/goxpJxT")
+           return
 
         spreadsheet = await get_spreadsheet('responses')
         roles = spreadsheet.col_values(6)
