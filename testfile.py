@@ -3,7 +3,7 @@ import asyncio
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import datetime
-import os
+
 
 client = discord.Client()
 
@@ -143,5 +143,4 @@ async def on_message(message):
 
         await channel.send(embed=embed)
 
-access_token = os.environ["BOT_TOKEN"]     
-client.run(access_token)
+client.run("NzA4MzAzMDc0NTE4NjMwNDY0.XrVYug.ZqLaCm7Rb2-QdMN2Z_0OssYLtgE")
