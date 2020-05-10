@@ -143,4 +143,4 @@ async def on_message(message):
 
         await channel.send(embed=embed)
 
-client.run("NzA4MzAzMDc0NTE4NjMwNDY0.XrVYug.ZqLaCm7Rb2-QdMN2Z_0OssYLtgE")
+client.run("NzA4MzAzMDc0NTE4NjMwNDY0.XrgKQA.6shor1WlhLZWcOdlwssnGOAqZp4")
