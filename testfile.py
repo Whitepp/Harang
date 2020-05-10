@@ -51,7 +51,7 @@ async def get_member_by_battletag(battletag):
 
     for member in grace.members:
         try:
-            if member.nick.startswith(battletag + '/'):
+            if member.nick.endswith(battletag):
                 return member
         except:
             continue
