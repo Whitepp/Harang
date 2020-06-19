@@ -4,6 +4,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import datetime
 import os
+import random
 
 client = discord.Client()
 
