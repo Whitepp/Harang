@@ -3,13 +3,11 @@ import asyncio
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import datetime
-import os
 import random
 
 client = discord.Client()
 
-scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
-         "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
+scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets', "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
 
 url = 'https://docs.google.com/spreadsheets/d/1WI7W0KjLaebqQUuLpf7BqhPYEKnLa2ppNLEiXasOce4/edit#gid=0'
 
@@ -36,7 +34,7 @@ async def get_spreadsheet(ws_name):
         auth.login()
 
     try:
-        # worksheet = auth.open('HarangTest').sheet1
+        #worksheet = auth.open('HarangTest').sheet1
         worksheet = auth.open_by_url(url).worksheet(ws_name)
     except gspread.exceptions.APIError:
         return
@@ -82,7 +80,7 @@ async def on_message(message):
             embed.add_field(name="Utility", value="주사위, 맵추천, 한줄소개", inline=False)
             await channel.send(embed=embed)
             return
-         
+
         if author == "운영진":
             spreadsheet = await get_spreadsheet('staff')
             data = spreadsheet.get_all_values()
@@ -98,9 +96,9 @@ async def on_message(message):
             return
 
         if author == "수다방":
-            await message.channel.send("https://open.kakao.com/o/goxpJxT")
-            return
-        
+           await message.channel.send("https://open.kakao.com/o/goxpJxT")
+           return
+
         if author == "공지방":
           await message.channel.send("https://open.kakao.com/o/gTJbLxT")
           return
@@ -113,10 +111,10 @@ async def on_message(message):
           await message.channel.send("https://cafe.naver.com/owgreen/8768")
           return
 
-         if author == "한줄소개":
+        if author == "한줄소개":
           await message.channel.send("https://forms.gle/BY1NrqinwzGf8wvs9")
           return
-         
+
         if author == "주사위":
             dice = "1 2 3 4 5 6"
             dicechoice = dice.split(" ")
@@ -147,7 +145,7 @@ async def on_message(message):
         except gspread.exceptions.APIError:
             return
 
-        # mention = spreadsheet.cell(index, 1).value
+        #mention = spreadsheet.cell(index, 1).value
         battletag = spreadsheet.cell(index, 2).value
         link = spreadsheet.cell(index, 4).value
         description = spreadsheet.cell(index, 5).value
@@ -195,7 +193,6 @@ async def on_message(message):
             embed.set_thumbnail(url=thumbnaillink)
 
         await channel.send(embed=embed)
-
 
 access_token = os.environ["BOT_TOKEN"]
 client.run(access_token)
