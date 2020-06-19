@@ -83,7 +83,9 @@ async def on_message(message):
             return
 
         if author == "문의방":
-            await message.channel.send("https://open.kakao.com/o/g233VUcb")
+            #await message.channel.send("https://open.kakao.com/o/g233VUcb")
+            embed = discord.Embed(title="문의방", description="문의방을 두려워하지 말라! \n https://open.kakao.com/o/g233VUcb", color=0xE86222)
+            await channel.send(embed=embed)
             return
 
         if author == "수다방":
