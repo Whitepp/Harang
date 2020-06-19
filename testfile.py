@@ -125,8 +125,8 @@ async def on_message(message):
             return
 
         if author == "맵추천":
-            map = "네팔 리장타워 부산 오아시스 일리오스 볼스카야인더스터리 아누비스신전 파리 하나무라 호라이즌달기지 66번국도 감시기지:지브롤터 도라도 리알토 쓰레기촌 하바나 눔바 블리자드월드 아이헨발데 왕의길 할리우드"
-            mapchoice = map.split(" ")
+            maps = "네팔 리장타워 부산 오아시스 일리오스 볼스카야인더스터리 아누비스신전 파리 하나무라 호라이즌달기지 66번국도 감시기지:지브롤터 도라도 리알토 쓰레기촌 하바나 눔바니 블리자드월드 아이헨발데 왕의길 할리우드"
+            mapchoice = maps.split(" ")
             mapnumber = random.randint(1, len(mapchoice))
             mapresult = mapchoice[mapnumber-1]
             await message.channel.send("하랑봇이 추천드리는 오늘의 맵은....!  **||" + mapresult+"||**")
