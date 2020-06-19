@@ -150,8 +150,8 @@ async def on_message(message):
         battletag = spreadsheet.cell(index, 2).value
         link = spreadsheet.cell(index, 4).value
         description = spreadsheet.cell(index, 5).value
-        imagelink = spreadsheet.cell(index, 6).value
-        thumbnaillink = spreadsheet.cell(index, 7).value
+        thumbnaillink = spreadsheet.cell(index, 6).value
+        imagelink= spreadsheet.cell(index, 7).value
         league = spreadsheet.cell(index, 8).value
         print(index, battletag, link, description, imagelink, thumbnaillink, league)
 
