@@ -3,7 +3,7 @@ import asyncio
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import datetime
-import os
+
 
 client = discord.Client()
 
@@ -80,7 +80,7 @@ async def on_message(message):
             embed = discord.Embed(title=":fire: 운영진 목록\n", description=log, color=0x5c0bb7)
             await channel.send(embed=embed)
             return
-        
+
         if author == "문의방":
             await message.channel.send("https://open.kakao.com/o/g233VUcb")
             return
@@ -88,6 +88,18 @@ async def on_message(message):
         if author == "수다방":
            await message.channel.send("https://open.kakao.com/o/goxpJxT")
            return
+
+        if author == "공지방":
+          await message.channel.send("https://open.kakao.com/o/gTJbLxT")
+          return
+
+        if author == "하랑카페":
+         await message.channel.send("https://cafe.naver.com/owgreen")
+         return
+
+        if author == "신입안내":
+          await message.channel.send("https://cafe.naver.com/owgreen/8768")
+          return
 
         spreadsheet = await get_spreadsheet('responses')
         roles = spreadsheet.col_values(6)
@@ -151,5 +163,4 @@ async def on_message(message):
 
         await channel.send(embed=embed)
 
-access_token = os.environ["BOT_TOKEN"]     
-client.run(access_token)
+client.run("NzA4MzAzMDc0NTE4NjMwNDY0.XrgK9A.P6nud3YsAl_dwSskps1FH_iJAos")
