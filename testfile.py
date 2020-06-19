@@ -75,7 +75,7 @@ async def on_message(message):
             return
 
         if author == "명령어":
-            embed = discord.Embed(title="명령어 모음", description="디도가 정리!", color=12745742)
+            embed = discord.Embed(title="명령어 모음", description="하랑봇 문의사항은 디도에게 전달해주세요", color=12745742)
             embed.add_field(name="LINK for Everything", value="문의방, 수다방, 공지방, 하랑카페, 신입안내", inline=False)
             embed.add_field(name="운영진 및 스탭 목록", value="운영진", inline=False)
             embed.add_field(name="Utility", value="주사위, 맵추천, 한줄소개", inline=False)
