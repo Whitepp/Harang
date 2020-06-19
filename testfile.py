@@ -3,11 +3,12 @@ import asyncio
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import datetime
-
+import os
 
 client = discord.Client()
 
-scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets', "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
+scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
+         "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
 
 url = 'https://docs.google.com/spreadsheets/d/1WI7W0KjLaebqQUuLpf7BqhPYEKnLa2ppNLEiXasOce4/edit#gid=0'
 
@@ -34,7 +35,7 @@ async def get_spreadsheet(ws_name):
         auth.login()
 
     try:
-        #worksheet = auth.open('HarangTest').sheet1
+        # worksheet = auth.open('HarangTest').sheet1
         worksheet = auth.open_by_url(url).worksheet(ws_name)
     except gspread.exceptions.APIError:
         return
@@ -86,20 +87,8 @@ async def on_message(message):
             return
 
         if author == "수다방":
-           await message.channel.send("https://open.kakao.com/o/goxpJxT")
-           return
-
-        if author == "공지방":
-          await message.channel.send("https://open.kakao.com/o/gTJbLxT")
-          return
-
-        if author == "하랑카페":
-         await message.channel.send("https://cafe.naver.com/owgreen")
-         return
-
-        if author == "신입안내":
-          await message.channel.send("https://cafe.naver.com/owgreen/8768")
-          return
+            await message.channel.send("https://open.kakao.com/o/goxpJxT")
+            return
 
         spreadsheet = await get_spreadsheet('responses')
         roles = spreadsheet.col_values(6)
@@ -115,7 +104,7 @@ async def on_message(message):
         except gspread.exceptions.APIError:
             return
 
-        #mention = spreadsheet.cell(index, 1).value
+        # mention = spreadsheet.cell(index, 1).value
         battletag = spreadsheet.cell(index, 2).value
         link = spreadsheet.cell(index, 4).value
         description = spreadsheet.cell(index, 5).value
@@ -163,4 +152,6 @@ async def on_message(message):
 
         await channel.send(embed=embed)
 
-client.run("NzA4MzAzMDc0NTE4NjMwNDY0.XrgK9A.P6nud3YsAl_dwSskps1FH_iJAos")
+
+access_token = os.environ["BOT_TOKEN"]
+client.run(access_token)
