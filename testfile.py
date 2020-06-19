@@ -105,12 +105,20 @@ async def on_message(message):
           await message.channel.send("https://cafe.naver.com/owgreen/8768")
           return
          
+        if author == "주사위":
+            dice = "1 2 3 4 5 6"
+            dicechoice = dice.split(" ")
+            dicenumber = random.randint(1, len(dicechoice))
+            diceresult = dicechoice[dicenumber - 1]
+            await message.channel.send("오늘 당신의 주사위는....!  " + diceresult+"!!!!")
+            return
+
         if author == "맵추천":
             map = "네팔 리장타워 부산 오아시스 일리오스 볼스카야인더스터리 아누비스신전 파리 하나무라 호라이즌달기지 66번국도 감시기지:지브롤터 도라도 리알토 쓰레기촌 하바나 눔바디 블리자드월드 아이헨발데 왕의길 할리우드"
             mapchoice = map.split(" ")
             mapnumber = random.randint(1, len(mapchoice))
             mapresult = mapchoice[mapnumber-1]
-            await message.channel.send(mapresult)
+            await message.channel.send("하랑봇이 추천드리는 오늘의 맵은....!  " + mapresult)
             return
 
         spreadsheet = await get_spreadsheet('responses')
