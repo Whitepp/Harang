@@ -79,7 +79,7 @@ async def on_message(message):
             embed = discord.Embed(title="명령어 모음", description="디도가 정리!", color=12745742)
             embed.add_field(name="LINK for Everything", value="문의방, 수다방, 공지방, 하랑카페, 신입안내", inline=False)
             embed.add_field(name="운영진 및 스탭 목록", value="운영진", inline=False)
-            embed.add_field(name="Utility", value="주사위, 맵추천", inline=False)
+            embed.add_field(name="Utility", value="주사위, 맵추천, 한줄소개", inline=False)
             await channel.send(embed=embed)
             return
          
@@ -111,6 +111,10 @@ async def on_message(message):
 
         if author == "신입안내":
           await message.channel.send("https://cafe.naver.com/owgreen/8768")
+          return
+
+         if author == "한줄소개":
+          await message.channel.send("https://forms.gle/BY1NrqinwzGf8wvs9")
           return
          
         if author == "주사위":
