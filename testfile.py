@@ -48,10 +48,10 @@ def has_role(member, role):
 
 
 async def get_member_by_battletag(battletag):
-    global grace
-    grace = client.get_guild(708306592465944587)
+    global harang
+    harang = client.get_guild(708306592465944587)
 
-    for member in grace.members:
+    for member in harang.members:
         try:
             if member.nick.endswith(battletag):
                 return member
