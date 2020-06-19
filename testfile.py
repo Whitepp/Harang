@@ -89,6 +89,18 @@ async def on_message(message):
         if author == "수다방":
             await message.channel.send("https://open.kakao.com/o/goxpJxT")
             return
+        
+        if author == "공지방":
+          await message.channel.send("https://open.kakao.com/o/gTJbLxT")
+          return
+
+        if author == "하랑카페":
+         await message.channel.send("https://cafe.naver.com/owgreen")
+         return
+
+        if author == "신입안내":
+          await message.channel.send("https://cafe.naver.com/owgreen/8768")
+          return
 
         spreadsheet = await get_spreadsheet('responses')
         roles = spreadsheet.col_values(6)
