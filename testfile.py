@@ -155,7 +155,8 @@ async def on_message(message):
             embed = discord.Embed(title="바로가기", url=link, description=description, color=0x5c0bb7)
 
         embed.set_author(name=battletag)
-        embed.add_field(name="League", value=":trophy: 제" + league + "회 우승", inline=False)
+        if(league is not ''):
+            embed.add_field(name="League", value=":trophy: 제" + league + "회 우승", inline=False)
         embed.add_field(name="직책", value=roleimage + role, inline=True)
         if imagelink is not '':
             embed.set_image(url=imagelink)
