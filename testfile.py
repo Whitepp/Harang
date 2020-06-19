@@ -48,7 +48,7 @@ def has_role(member, role):
 
 async def get_member_by_battletag(battletag):
     global harang
-    harang = client.get_guild(708306592465944587)
+    harang = client.get_guild(406688488671543297)
 
     for member in harang.members:
         try:
@@ -158,10 +158,14 @@ async def on_message(message):
         member = await get_member_by_battletag(battletag)
         if member == None:
             return
-        elif has_role(member, '클랜 마스터'):
-            role = '클랜 마스터'
+        elif has_role(member, '마스터'):
+            role = '마스터'
         elif has_role(member, '운영진'):
             role = '운영진'
+        elif has_role(member, '스텝-디자인'):
+            role = '디자인 스텝'
+        elif has_role(member, '스텝-DC'):
+            role = '디스코드 스텝'
         elif has_role(member, '클랜원'):
             role = '클랜원'
         elif has_role(member, '신입 클랜원'):
@@ -171,7 +175,7 @@ async def on_message(message):
 
         print(battletag)
         print(role)
-        if role == "클랜 마스터":
+        if role == "마스터":
             roleimage = ":pen_ballpoint:"
         elif role == "운영진":
             roleimage = ":construction_worker:"
@@ -179,6 +183,8 @@ async def on_message(message):
             roleimage = ":boy:"
         elif role == "신입 클랜원":
             roleimage = ":baby:"
+        else:
+            roleimage = ":woman_construction_worker:"
 
         embed = discord.Embed(title="한줄소개", description=description, color=3447003)
         if link is not '':
