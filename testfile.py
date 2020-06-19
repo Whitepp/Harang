@@ -78,7 +78,7 @@ async def on_message(message):
             spreadsheet = await get_spreadsheet('staff')
             data = spreadsheet.get_all_values()
             log = '\n\n'.join(map(lambda x: '\n'.join([t for t in x if t != '']), data))
-            embed = discord.Embed(title=":fire: 운영진 목록\n", description=log, color=0x5c0bb7)
+            embed = discord.Embed(title=":fire: 운영진 목록\n", description=log, color=12320855)
             await channel.send(embed=embed)
             return
 
@@ -150,7 +150,7 @@ async def on_message(message):
         elif role == "신입 클랜원":
             roleimage = ":baby:"
 
-        embed = discord.Embed(title="한줄소개", description=description, color=0x5c0bb7)
+        embed = discord.Embed(title="한줄소개", description=description, color=3447003)
         if link is not '':
             embed = discord.Embed(title="바로가기", url=link, description=description, color=0x5c0bb7)
 
