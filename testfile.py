@@ -121,7 +121,7 @@ async def on_message(message):
             dicechoice = dice.split(" ")
             dicenumber = random.randint(1, len(dicechoice))
             diceresult = dicechoice[dicenumber - 1]
-            await message.channel.send("오늘 당신의 주사위는....!  ||   " + diceresult+"   ||!!!!")
+            await message.channel.send("오늘 당신의 주사위는....!  **||   " + diceresult+"   ||**!!!!")
             return
 
         if author == "맵추천":
@@ -129,7 +129,7 @@ async def on_message(message):
             mapchoice = map.split(" ")
             mapnumber = random.randint(1, len(mapchoice))
             mapresult = mapchoice[mapnumber-1]
-            await message.channel.send("하랑봇이 추천드리는 오늘의 맵은....!  " + mapresult)
+            await message.channel.send("하랑봇이 추천드리는 오늘의 맵은....!  **||" + mapresult+"||**")
             return
 
         spreadsheet = await get_spreadsheet('responses')
