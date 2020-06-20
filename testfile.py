@@ -182,7 +182,7 @@ async def on_message(message):
         embed = discord.Embed(title="한줄소개", description=description, color=3447003)
 
         if link is not '':
-            embed = discord.Embed(title="바로가기", url=link, description=description, color=0x5c0bb7)
+            embed = discord.Embed(title="바로가기", url=link, description=description, color=3447003)
 
         embed.set_author(name=battletag)
         if(league is not ''):
