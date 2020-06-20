@@ -80,7 +80,7 @@ async def on_message(message):
             await channel.send(embed=embed)
             return
 
-        if author == "클랜원":
+        if author == "한줄소개":
             spreadsheet = await get_spreadsheet('responses')
             data = spreadsheet.col_values(3)
             data[0] = "한줄소개 명령어 리스트입니다!"
@@ -91,7 +91,7 @@ async def on_message(message):
             embed = discord.Embed(title="명령어 모음", description="하랑봇 문의사항은 디도에게 전달해주세요", color=12745742)
             embed.add_field(name="LINK for Everything", value="문의방, 수다방, 공지방, 하랑카페, 신입안내", inline=False)
             embed.add_field(name="운영진 및 스탭 목록", value="운영진", inline=False)
-            embed.add_field(name="Utility", value="주사위, 맵추천, 한줄소개", inline=False)
+            embed.add_field(name="Utility", value="주사위, 맵추천, 한줄소개, 한줄소개설문지", inline=False)
             await channel.send(embed=embed)
             return
 
@@ -125,7 +125,7 @@ async def on_message(message):
           await message.channel.send("https://cafe.naver.com/owgreen/8768")
           return
 
-        if author == "한줄소개":
+        if author == "한줄소개설문지":
           await message.channel.send("https://forms.gle/BY1NrqinwzGf8wvs9")
           return
 
