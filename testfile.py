@@ -19,7 +19,7 @@ current_time = lambda: datetime.datetime.utcnow() + datetime.timedelta(hours=9)
 async def on_ready():
     global Harang
     await client.wait_until_ready()
-    game = discord.Game("테스트")
+    game = discord.Game("하랑과 연애")
     print("login: Harang Main")
     print(client.user.name)
     print(client.user.id)
