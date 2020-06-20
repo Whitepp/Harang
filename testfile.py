@@ -125,7 +125,8 @@ async def on_message(message):
             return
 
         if author == "맵추천":
-            maps = "네팔 리장타워 부산 오아시스 일리오스 볼스카야인더스터리 아누비스신전 파리 하나무라 호라이즌달기지 66번국도 감시기지:지브롤터 도라도 리알토 쓰레기촌 하바나 눔바니 블리자드월드 아이헨발데 왕의길 할리우드"
+            #파리 호라이즌
+            maps = "네팔 리장타워 부산 오아시스 일리오스 볼스카야인더스터리 아누비스신전 하나무라 66번국도 감시기지:지브롤터 도라도 리알토 쓰레기촌 하바나 눔바니 블리자드월드 아이헨발데 왕의길 할리우드"
             mapchoice = maps.split(" ")
             mapnumber = random.randint(1, len(mapchoice))
             mapresult = mapchoice[mapnumber-1]
@@ -140,7 +141,6 @@ async def on_message(message):
 
         try:
             index = nickname.index(author) + 1
-            print(index)
         except gspread.exceptions.CellNotFound:
             return
         except gspread.exceptions.APIError:
@@ -158,35 +158,29 @@ async def on_message(message):
         member = await get_member_by_battletag(battletag)
         if member == None:
             return
-        elif has_role(member, '마스터'):
-            role = '마스터'
-        elif has_role(member, '운영진'):
-            role = '운영진'
-        elif has_role(member, '스텝-디자인'):
-            role = '디자인 스텝'
-        elif has_role(member, '스텝-DC'):
-            role = '디스코드 스텝'
-        elif has_role(member, '클랜원'):
-            role = '클랜원'
-        elif has_role(member, '신입 클랜원'):
-            role = '신입 클랜원'
+        elif has_role(member, "마스터"):
+            role = "마스터"
+            roleimage = ":pen_ballpoint:"
+        elif has_role(member, "운영진"):
+            role = "운영진"
+            roleimage = ":construction_worker:"
+        elif has_role(member, "스텝-디자인"):
+            role = "디자인 스텝"
+            roleimage = ":woman_construction_worker:"
+        elif has_role(member, "스텝-DC"):
+            role = "디스코드 스텝"
+            roleimage = ":woman_construction_worker:"
+        elif has_role(member, "클랜원"):
+            role = "클랜원"
+            roleimage = ":boy:"
+        elif has_role(member, "신입 클랜원"):
+            role = "신입 클랜원"
+            roleimage = ":baby:"
         else:
             return
 
-        print(battletag)
-        print(role)
-        if role == "마스터":
-            roleimage = ":pen_ballpoint:"
-        elif role == "운영진":
-            roleimage = ":construction_worker:"
-        elif role == "클랜원":
-            roleimage = ":boy:"
-        elif role == "신입 클랜원":
-            roleimage = ":baby:"
-        else:
-            roleimage = ":woman_construction_worker:"
-
         embed = discord.Embed(title="한줄소개", description=description, color=3447003)
+
         if link is not '':
             embed = discord.Embed(title="바로가기", url=link, description=description, color=0x5c0bb7)
 
