@@ -74,6 +74,19 @@ async def on_message(message):
         if author == '':
             return
 
+        if author == "하랑봇":
+            embed = discord.Embed(title=":robot:하랑봇:robot:", description="하랑봇 온라인!", color=3066993)
+            embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/708306592465944591/723914634116988988/3b53af51b6da75d2.png")
+            await channel.send(embed=embed)
+            return
+
+        if author == "클랜원":
+            spreadsheet = await get_spreadsheet('responses')
+            data = spreadsheet.col_values(3)
+            data[0] = "한줄소개 명령어 리스트입니다!"
+            await channel.send(data)
+            return
+
         if author == "명령어":
             embed = discord.Embed(title="명령어 모음", description="하랑봇 문의사항은 디도에게 전달해주세요", color=12745742)
             embed.add_field(name="LINK for Everything", value="문의방, 수다방, 공지방, 하랑카페, 신입안내", inline=False)
