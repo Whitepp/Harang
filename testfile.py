@@ -130,7 +130,7 @@ async def on_message(message):
           return
 
         if author == "주사위":
-            dice = "1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 100"
+            dice = "1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 777"
             dicechoice = dice.split(" ")
             dicenumber = random.randint(1, len(dicechoice))
             diceresult = dicechoice[dicenumber - 1]
