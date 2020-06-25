@@ -155,7 +155,7 @@ async def on_message(message):
                 return
 
             ws = await get_spreadsheet('temp')
-            print(ws.cell(1, 1).value)
+
             if ws.cell(1, 1).value is not '':
                 ws.clear()
                 ws.resize(rows=4, cols=1)
@@ -271,22 +271,22 @@ async def on_message(message):
         if member is None:
             print("none")
             return
-        elif has_role(member, "마스터"):
+        elif await has_role(member, "마스터"):
             role = "마스터"
             roleimage = ":pen_ballpoint:"
-        elif has_role(member, "운영진"):
+        elif await has_role(member, "운영진"):
             role = "운영진"
             roleimage = ":construction_worker:"
-        elif has_role(member, "스텝-디자인"):
+        elif await has_role(member, "스텝-디자인"):
             role = "디자인 스텝"
             roleimage = ":woman_construction_worker:"
-        elif has_role(member, "스텝-DC"):
+        elif await has_role(member, "스텝-DC"):
             role = "디스코드 스텝"
             roleimage = ":woman_construction_worker:"
-        elif has_role(member, "클랜원"):
+        elif await has_role(member, "클랜원"):
             role = "클랜원"
             roleimage = ":boy:"
-        elif has_role(member, "신입 클랜원"):
+        elif await has_role(member, "신입 클랜원"):
             role = "신입 클랜원"
             roleimage = ":baby:"
         else:
@@ -297,8 +297,9 @@ async def on_message(message):
         if link is not '':
             embed = discord.Embed(title="바로가기", url=link, description=description, color=3447003)
 
-        embed.content(name=battletag)
-        if (league is not ''):
+        #embed.content(name=battletag)
+
+        if league is not '':
             embed.add_field(name="League", value=":trophy: 제" + league + "회 우승", inline=False)
         embed.add_field(name="직책", value=roleimage + role, inline=True)
         if imagelink is not '':
