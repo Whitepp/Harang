@@ -69,6 +69,14 @@ async def get_opener(self):
     return ws.cell(1, 1).value
 
 
+async def is_spreadsheet_empty(sheetname):
+    ws = await get_spreadsheet(sheetname)
+    if ws.cell(1, 1).value is "":
+        return True
+    else:
+        return False
+
+
 @client.event
 async def on_message(message):
     author = message.author
@@ -90,12 +98,14 @@ async def on_message(message):
             time = content.split(" ")[1]
             desc = content[12:]
 
-            ws = await get_spreadsheet('temp')
-            ws.resize(rows=4, cols=1)
-
-            if ws.cell(1, 1).value is not "":
+            # 개최될 스크림이 있는지 확인
+            result = await is_spreadsheet_empty('temp')
+            if result is True:
                 await message.channel.send("이미 개최될 스크림이 있습니다")
                 return
+
+            ws = await get_spreadsheet('temp')
+            ws.resize(rows=4, cols=1)
 
             ws.append_row([author.mention])
             ws.append_row([time])
@@ -105,6 +115,13 @@ async def on_message(message):
             return
 
         if content == "스크림신청":
+            # 예정된 스크림이 있는지 확인
+            result = await is_spreadsheet_empty('temp')
+            if result is True:
+                await message.channel.send("오늘은 예정된 스크림이 없습니다")
+                return
+
+            # 스크림 신청
             ws = await get_spreadsheet('temp2')
             try:
                 ws.find(author.mention)
@@ -117,6 +134,13 @@ async def on_message(message):
             return
 
         if content == "스크림신청취소":
+            # 예정된 스크림이 있는지 확인
+            result = await is_spreadsheet_empty('temp')
+            if result is True:
+                await message.channel.send("오늘은 예정된 스크림이 없습니다")
+                return
+
+            # 스크림 신청 취소
             ws = await get_spreadsheet('temp2')
             try:
                 ws.find(author.mention)
@@ -131,47 +155,53 @@ async def on_message(message):
             await message.channel.send("스크림 신청 취소가 완료되었습니다")
             return
 
-        if content == "스크림": #스크림이없습니다 추가해야됨
-            ws = await get_spreadsheet('temp')
-
-            if ws.cell(1, 1).value is  "":
+        if content == "스크림":
+            # 예정된 스크림이 있는지 확인
+            result = await is_spreadsheet_empty('temp')
+            if result is True:
                 await message.channel.send("오늘은 예정된 스크림이 없습니다")
                 return
+
+            # 스크림 정보를 보여주기 위한 작업
+            ws = await get_spreadsheet('temp')
 
             opener = ws.cell(1, 1).value
             time = ws.cell(2, 1).value
             desc = ws.cell(3, 1).value
 
             ws = await get_spreadsheet('temp2')
-            parlist = ws.get_all_values()
+            participant = ws.get_all_values()
 
             embed = discord.Embed(title="오늘의 스크림", description=desc, color=12745742)
             embed.add_field(name="시간", value=time, inline=False)
             embed.add_field(name="개최자", value=opener, inline=False)
-            embed.add_field(name="참가자", value=parlist, inline=False)
+            embed.add_field(name="참가자", value=participant, inline=False)
 
             await channel.send(embed=embed)
             return
 
         if content == "스크림종료":
+            # 종료할 스크림이 있는지 확인
+            result = await is_spreadsheet_empty('temp')
+            if result is True:
+                await message.channel.send("종료할 스크림이 없습니다")
+                return
+
+            # 종료 커맨드 날린 author 가 개최자 혹은 운영자인지 확인
             if author.mention != (await get_opener(author.mention)) and (not is_moderator(author)):
                 await message.channel.send("내전 개최자 또는 운영진만 내전을 종료할 수 있습니다.")
                 return
 
+            # 내전 종료하는 작업 준비
             ws = await get_spreadsheet('temp')
+            ws.clear()
+            ws.resize(rows=4, cols=1)
 
-            if ws.cell(1, 1).value is not '':
-                ws.clear()
-                ws.resize(rows=4, cols=1)
+            ws = await get_spreadsheet('temp2')
+            ws.clear()
 
-                ws = await get_spreadsheet('temp2')
-                ws.clear()
-
-                await message.channel.send("@everyone \n 스크림이 종료되었습니다")
-                return
-            else:
-                await message.channel.send("종료 혹은 취소할 스크림이 없습니다")
-                return
+            await message.channel.send("@everyone \n 스크림이 종료되었습니다")
+            return
 
         if content == "하랑봇":
             embed = discord.Embed(title=":robot:하랑봇:robot:", description="하랑봇 온라인!", color=3066993)
@@ -302,7 +332,7 @@ async def on_message(message):
         if link is not '':
             embed = discord.Embed(title="바로가기", url=link, description=description, color=3447003)
 
-        #embed.content(name=battletag)
+        # embed.content(name=battletag)
 
         if league is not '':
             embed.add_field(name="League", value=":trophy: 제" + league + "회 우승", inline=False)
