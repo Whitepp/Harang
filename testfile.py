@@ -174,7 +174,6 @@ async def on_message(message):
             ws = await get_spreadsheet('temp2')
             participant = ws.get_all_values()
             counts = ws.row_count
-            print(counts)
 
             embed = discord.Embed(title="오늘의 스크림", description=desc, color=12745742)
             embed.add_field(name="시간", value=time, inline=False)
@@ -182,6 +181,37 @@ async def on_message(message):
             embed.add_field(name="참가자 {}명".format(counts), value=participant, inline=False)
 
             await channel.send(embed=embed)
+            return
+
+        if content.startswith("개최자변경"):
+            # 예정된 스크림이 있는지 확인
+            print("개최자 변경")
+            result = await is_spreadsheet_empty('temp')
+            if result is True: #is empty
+                await message.channel.send("오늘은 예정된 스크림이 없습니다")
+                return
+
+            # 새로운 개최자로 변경
+            newopener = content.split(" ")[1]
+
+            ws = await get_spreadsheet('temp')
+            ws.update_cell(1, 1, newopener)
+            await message.channel.send("개최자 업데이트 완료")
+            return
+
+        if content.startswith("시간변경"):
+            # 예정된 스크림이 있는지 확인
+            result = await is_spreadsheet_empty('temp')
+            if result is True:
+                await message.channel.send("오늘은 예정된 스크림이 없습니다")
+                return
+
+            # 새로운 시간으로 업데이트
+            newtime = content.split(" ")[1]
+
+            ws = await get_spreadsheet('temp')
+            ws.update_cell(2, 1, newtime)
+            await message.channel.send("시간 업데이트 완료")
             return
 
         if content == "스크림종료":
