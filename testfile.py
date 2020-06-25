@@ -93,7 +93,6 @@ async def on_message(message):
             ws = await get_spreadsheet('temp')
             ws.resize(rows=4, cols=1)
 
-            print(ws.cell(1, 1).value)
             if ws.cell(1, 1).value is not "":
                 await message.channel.send("이미 개최될 스크림이 있습니다")
                 return
@@ -132,8 +131,13 @@ async def on_message(message):
             await message.channel.send("스크림 신청 취소가 완료되었습니다")
             return
 
-        if content == "스크림":
+        if content == "스크림": #스크림이없습니다 추가해야됨
             ws = await get_spreadsheet('temp')
+
+            if ws.cell(1, 1).value is  "":
+                await message.channel.send("오늘은 예정된 스크림이 없습니다")
+                return
+
             opener = ws.cell(1, 1).value
             time = ws.cell(2, 1).value
             desc = ws.cell(3, 1).value
