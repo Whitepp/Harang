@@ -149,7 +149,7 @@ async def on_message(message):
             await channel.send(embed=embed)
             return
 
-        if content == "스크림종료" or "스크림취소":
+        if content == "스크림종료":
             if author.mention != (await get_opener(author.mention)) and (not is_moderator(author)):
                 await message.channel.send("내전 개최자 또는 운영진만 내전을 종료할 수 있습니다.")
                 return
