@@ -100,7 +100,7 @@ async def on_message(message):
 
             # 개최될 스크림이 있는지 확인
             result = await is_spreadsheet_empty('temp')
-            if result is True:
+            if result is False:
                 await message.channel.send("이미 개최될 스크림이 있습니다")
                 return
 
