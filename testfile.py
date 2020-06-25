@@ -40,7 +40,6 @@ async def get_spreadsheet(ws_name):
         auth.login()
 
     try:
-        # worksheet = auth.open('HarangTest').sheet1
         worksheet = auth.open_by_url(url).worksheet(ws_name)
     except gspread.exceptions.APIError:
         print("API Error")
@@ -103,6 +102,9 @@ async def on_message(message):
             if result is False:
                 await message.channel.send("이미 개최될 스크림이 있습니다")
                 return
+
+            ws = await get_spreadsheet('temp2')
+            ws.resize(rows=1, cols=1)
 
             ws = await get_spreadsheet('temp')
             ws.resize(rows=4, cols=1)
@@ -171,11 +173,13 @@ async def on_message(message):
 
             ws = await get_spreadsheet('temp2')
             participant = ws.get_all_values()
+            counts = ws.row_count
+            print(counts)
 
             embed = discord.Embed(title="오늘의 스크림", description=desc, color=12745742)
             embed.add_field(name="시간", value=time, inline=False)
             embed.add_field(name="개최자", value=opener, inline=False)
-            embed.add_field(name="참가자", value=participant, inline=False)
+            embed.add_field(name="참가자 {}명".format(counts), value=participant, inline=False)
 
             await channel.send(embed=embed)
             return
@@ -198,6 +202,7 @@ async def on_message(message):
             ws.resize(rows=4, cols=1)
 
             ws = await get_spreadsheet('temp2')
+            ws.resize(rows=1, cols=1)
             ws.clear()
 
             await message.channel.send("@everyone \n 스크림이 종료되었습니다")
