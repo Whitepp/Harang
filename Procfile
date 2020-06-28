@@ -1,1 +1,1 @@
-worker: python testfile.py
+worker: python testfile.py & wait -n
