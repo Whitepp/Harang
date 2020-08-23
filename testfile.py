@@ -252,7 +252,7 @@ async def on_message(message):
         if content == "어몽어스봇":
             embed = discord.Embed(title=":robot:어몽어스봇:robot:", description="어몽어스봇 온라인!", color=3066993)
             embed.set_thumbnail(
-                url="https://cdn.discordapp.com/attachments/708306592465944591/723914634116988988/3b53af51b6da75d2.png")
+                url="https://cdn.discordapp.com/attachments/745607853435387988/746983379597000734/1ab09baeb9913193.jpg")
             await channel.send(embed=embed)
             return
 
